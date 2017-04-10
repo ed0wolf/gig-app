@@ -9,14 +9,10 @@ export default class AppRoutes extends React.Component {
         return (
             <Router>
                 <div>
-                <ul>
-                    <li><Link to="/">Home</Link></li>
-                </ul>
+                    <h1 className="page-title"><Link to="/">Gig App</Link></h1>
 
-                <hr/>
-
-                <Route exact path="/" component={Home}/>
-                <Route path="/artist/:id" component={ArtistOverview} />
+                    <Route exact path="/" component={Home}/>
+                    <Route path="/artist/:id" component={ArtistOverview} />
                 </div>
             </Router>
         );

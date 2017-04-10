@@ -12451,19 +12451,14 @@ var AppRoutes = function (_React$Component) {
                     'div',
                     null,
                     _react2.default.createElement(
-                        'ul',
-                        null,
+                        'h1',
+                        { className: 'page-title' },
                         _react2.default.createElement(
-                            'li',
-                            null,
-                            _react2.default.createElement(
-                                _reactRouterDom.Link,
-                                { to: '/' },
-                                'Home'
-                            )
+                            _reactRouterDom.Link,
+                            { to: '/' },
+                            'Gig App'
                         )
                     ),
-                    _react2.default.createElement('hr', null),
                     _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _Home2.default }),
                     _react2.default.createElement(_reactRouterDom.Route, { path: '/artist/:id', component: _ArtistOverview2.default })
                 )

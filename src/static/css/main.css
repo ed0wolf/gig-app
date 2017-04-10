@@ -1,0 +1,25 @@
+* {
+    font-family: sans-serif;
+}
+
+.page-title {
+    color: grey;
+}
+
+.page-title a {
+    color: grey;
+    text-decoration:none;
+}
+
+
+.page-title a:hover{
+    color: grey;
+}
+
+.page-title a:active {
+    color: grey;
+}
+
+.page-title a:visited {
+    color: grey;
+}
