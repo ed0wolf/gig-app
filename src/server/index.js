@@ -32,6 +32,10 @@ app.get('/api/gigs/:artistId/filters', (req, res) => {
   handleRetrievalResponse(gigRepository.getGigFiltersForArtist(req.params.artistId), res);
 });
 
+app.get('/api/gigs/:artistId', (req, res) => {
+  handleRetrievalResponse(gigRepository.getGigsMatchingFilters(req.params.artistId, req.query), res);
+});
+
 app.listen(3000, () => {
   console.log('Example app listening on port 3000!');
 });

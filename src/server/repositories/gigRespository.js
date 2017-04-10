@@ -4,13 +4,9 @@ var moment = require('moment');
 
 var allGigs = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../../../database/gigs.json')));
 
-var getCountry = (gig) => { 
-    if(gig.venue && gig.venue.country) {
-        return gig.venue.country["@name"];
-    };
-    return 'unknown';
-};
-var getYear = (gig) => moment(gig["@eventDate"], 'DD-MM-YYYY').year();
+var getArtistId = gig => gig.artist['@mbid'];
+var getCountry = gig => gig.venue.city.country["@name"];
+var getYear = gig => moment(gig["@eventDate"], 'DD-MM-YYYY').year();
 
 module.exports.getGigFiltersForArtist = (artistId) => {
     return new Promise((success, error) => {
@@ -19,10 +15,10 @@ module.exports.getGigFiltersForArtist = (artistId) => {
             year: {}
         };
 
-        for(var gig in allGigs.filter(x => x.artist['@mbid'] === artistId)) {
+        allGigs.filter(x => getArtistId(x) === artistId).forEach(function(gig) {
             filters.country[getCountry(gig)] = null;
             filters.year[getYear(gig)] = null;
-        }
+        });
 
         success({
             country: Object.keys(filters.country),
@@ -30,3 +26,19 @@ module.exports.getGigFiltersForArtist = (artistId) => {
         });
     });
 }
+
+module.exports.getGigsMatchingFilters = (artistId, filters) => {
+    return new Promise((success, error) => {
+        var filterPredicates = [];
+        if(filters.country) {
+            filterPredicates.push(gig => getCountry(gig) === filters.country);
+        }
+        if(filters.year) {
+            filterPredicates.push(gig => getYear(gig).toString() === filters.year);
+        }
+
+        var matchedGigs = allGigs.filter(x => getArtistId(x) === artistId && filterPredicates.every(pred => pred(x)));
+
+        success(matchedGigs);
+    });
+};
