@@ -1,6 +1,8 @@
 import React from 'react';
 import {getArtistById} from '../stores/artistStore';
 
+import GigsFilter from './GigsFilter';
+
 export default class ArtistOverview extends React.Component {
     constructor(props) {
         super(props);
@@ -25,6 +27,7 @@ export default class ArtistOverview extends React.Component {
         return (
             <div className="artistOverview">
                 <h2>{this.state.artist.name}</h2>
+                <GigsFilter artistId={this.state.artist.id} />
             </div>
         );
     }

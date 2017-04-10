@@ -20,10 +20,17 @@ module.exports.getGigFiltersForArtist = (artistId) => {
             filters.year[getYear(gig)] = null;
         });
 
-        success({
-            country: Object.keys(filters.country),
-            year: Object.keys(filters.year)
-        });
+        var countries = Object.keys(filters.country);
+        var years = Object.keys(filters.year); 
+
+        if(countries.length === 0 && years.length === 0) {
+            success(null);
+        } else {
+            success({
+                countries: countries,
+                years: years
+            });
+        }
     });
 }
 

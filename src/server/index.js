@@ -12,7 +12,11 @@ app.get('/', (req, res) => {
 
 var handleRetrievalResponse = (promise, res) => {
   return promise.then(data => {
-    res.send({ data: data });
+    if(data) {
+      res.send({ data: data });
+    } else {
+      res.sendStatus(404);
+    }
   }).catch(err => {
     console.error(err)    
     res.status(500);

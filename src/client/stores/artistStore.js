@@ -1,9 +1,4 @@
-var fetchJson = (path) => fetch(path).then(res => {
-    if(!res.ok) {
-        throw new Error(`Failed to get ${path}, status ${res.statusText}`);
-    }
-    return res.json();
-})
+import fetchJson from './fetchJson';
 
 export function getArtists() {
     return fetchJson('/api/artists');
